@@ -47,3 +47,9 @@ To facilitate this, transform the `subnet_availability_zones` input variable int
 Also, adjust the CIDR ranges for the subnets to avoid overlap (all subnets had the same CIDR range: `172.0.0.0/20`) and adjust the VPC CIDR range to provide more IP addresses.
 
 The `for_each` meta-argument is also used to condense management of EFS mount targets for each subnet.
+
+### Prevent modification of the default security group
+Prevent modification of the default security group, instead create a new security group by changing `aws_default_security_group` resource to `aws_security_group`.
+
+### Restrict inbound traffic to TCP protocol
+Prevent inbound traffic from other protocols (except SSH) as the cluster components only needs to communicate via SSH. This would provide better security.
