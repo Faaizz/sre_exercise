@@ -56,6 +56,8 @@ Prevent inbound traffic from other protocols (except SSH) as the cluster compone
 
 ### Extract kops arguments into terraform variables
 Extract kops arguments: master node size, master node count, node size, and node count into terraform variables such that they can be dynamically changed at runtime.
+In terms of general Kubernetes architecture, a production cluster should have at least 3 master nodes (only one specified in config) in different availability zones to ensure high availability (HA).
+Also, worker nodes should definitely be more than one (only one specified).
 
 ### Configure S3 backend
 Add required configuration to S3 backend definition.
