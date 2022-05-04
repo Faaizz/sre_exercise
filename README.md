@@ -71,3 +71,6 @@ Monitoring and Alerting: Prometheus + AlertManager + Grafana
 
 Logging: Fluentd + Elasticsearch + Kibana
 ![logging-architecture](./img/logging-architecture.jpg)
+
+### Extra Credit Question
+For scalability, create ansible playbooks that initialize a cluster which can be reused as necessary.
