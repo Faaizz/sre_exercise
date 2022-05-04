@@ -64,3 +64,10 @@ Add required configuration to S3 backend definition.
 
 ### Add ACL to S3 bucket
 Add ACL to S3 bucket to prevent unauthorized access.
+
+### Monitoring, Logging, and Alerting Architecture
+Monitoring and Alerting: Prometheus + AlertManager + Grafana
+![monitoring-architecture](./img/monitoring-architecture.jpg)
+
+Logging: Fluentd + Elasticsearch + Kibana
+![logging-architecture](./img/logging-architecture.jpg)
