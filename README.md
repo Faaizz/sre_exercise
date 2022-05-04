@@ -40,3 +40,8 @@ terraform workspace new prod
 
 ### Add provider requirements
 Declare requirement of `aws` provider, so that Terraform can install it.
+
+### Use the `for_each` Meta-Argument to manage several similar items
+Use the `for_each` meta-argument in resource blocks iteratively create subnets and their respective route associations.
+To facilitate this, transform the `subnet_availability_zones` input variable into a local variable.
+Also, adjust the CIDR ranges for the subnets to avoid overlap (all subnets had the same CIDR range: `172.0.0.0/20`) and adjust the VPC CIDR range to provide more IP addresses.

@@ -10,8 +10,24 @@ variable "region" {
 	description = "The region in AWS where the cluster should be spawned"
 }
 
-variable "subnet_availability_zones" {
-	type = list(string)
-	default = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
-	description = "The availability zones to create subnets in. If you use a region other than eu-central-1, then you should change this variable"
+locals {
+    vpc = {
+        cidr_block = "172.0.0.0/12"
+    }
+
+    subnet_availability_zones = {
+        eu-central-1a = {
+            cidr_block = "172.1.0.0/16"
+        }
+        eu-central-1b = {
+            cidr_block = "172.2.0.0/16"
+        }
+        eu-central-1c = {
+            cidr_block = "172.3.0.0/16"
+        }
+    }
+    
+    subnets = [ for sn in aws_subnet.saz : {
+        id = saz.id
+    } ]
 }
