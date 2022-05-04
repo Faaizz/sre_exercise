@@ -28,3 +28,12 @@ solutions or tools but open-source tools are preferred. You don't need to write 
 1. Imagine Cognigy grows fast, and you need to scale such environments to dozens of installations. What would be
 your suggestion to improve previous solutions to make deployment, monitoring and logging architectures scalable?
 
+
+## Solution
+
+### Change directory structure and to use workspaces instead of different directories for dev and prod
+Use the default workspace for `dev` and create a new workspace for `prod` such that code management can be done in a single directory.
+```shell
+# Create (and switch to) new workspace for production
+terraform workspace new prod
+```
