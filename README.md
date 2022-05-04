@@ -53,3 +53,7 @@ Prevent modification of the default security group, instead create a new securit
 
 ### Restrict inbound traffic to TCP protocol
 Prevent inbound traffic from other protocols (except SSH) as the cluster components only needs to communicate via SSH. This would provide better security.
+
+### Extract kops arguments into terraform variables
+Extract kops arguments: master node size, master node count, node size, and node count into terraform variables such that they can be dynamically changed at runtime.
+

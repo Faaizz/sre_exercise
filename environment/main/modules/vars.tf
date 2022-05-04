@@ -10,6 +10,30 @@ variable "region" {
 	description = "The region in AWS where the cluster should be spawned"
 }
 
+variable "master_size" {
+    type = string
+    default = "t2.medium"
+    description = "The size of master node EC2 instance"
+}
+
+variable "master_count" {
+    type = number
+    default = 1
+    description = "The number of cluster master nodes"
+}
+
+variable "node_size" {
+    type = string
+    default = "c5.2xlarge"
+    description = "The size of node node EC2 instance"
+}
+
+variable "node_count" {
+    type = number
+    default = 3
+    description = "The number of cluster nodes"
+}
+
 locals {
     vpc = {
         cidr_block = "172.0.0.0/12"
