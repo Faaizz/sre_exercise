@@ -1,3 +1,3 @@
 module "state-setup" {
-    source = "../modules"
+    source = "./modules"
 }

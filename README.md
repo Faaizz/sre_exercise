@@ -59,3 +59,6 @@ Extract kops arguments: master node size, master node count, node size, and node
 
 ### Configure S3 backend
 Add required configuration to S3 backend definition.
+
+### Add ACL to S3 bucket
+Add ACL to S3 bucket to prevent unauthorized access.
