@@ -37,3 +37,6 @@ Use the default workspace for `dev` and create a new workspace for `prod` such t
 # Create (and switch to) new workspace for production
 terraform workspace new prod
 ```
+
+### Add provider requirements
+Declare requirement of `aws` provider, so that Terraform can install it.
