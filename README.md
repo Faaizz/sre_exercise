@@ -59,6 +59,40 @@ Extract kops arguments: master node size, master node count, node size, and node
 In terms of general Kubernetes architecture, a production cluster should have at least 3 master nodes (only one specified in config) in different availability zones to ensure high availability (HA).
 Also, worker nodes should definitely be more than one (only one specified).
 
+### Usage of kops
+Firstly, the generated `kops` command is never run automatically by terraform, this means the Kubernetes cluster is never fully provisioned.
+
+A suggestion would be to pull out the entire provisioning process into an ansible playbook. 
+Such that the initial provisioning of the resources required by `kops` is handled in ansible, then `kops create` is run with the `--target=terraform` flag such that the required terraform files to create the cluster are generated, then `terraform apply` is run to actually create the cluster, and finally `kops validate` to ensure that the cluster is working as expected.
+On cluster edit/update, only the generated terraform files need be updated (or `kops update` nneds to be run), followed by `terraform apply` to update the actual state to the desired state. A sample ansible playbook would look like:
+
+```yaml
+-   name: Kubernetes Cluster Creation
+    hosts: localhost
+    connection: local
+    vars:
+        clusterName: custer-name-here
+        awsZones: "comma,listed,zones"
+        outDir: ./kops-terraform
+
+    tasks:
+        -   name: setup required AWS resources for kOps
+            # Setup IAM user, configure DNS, & setup S3 backend
+
+        -   name: generate terraform files
+            ansible.builtin.shell:
+                cmd: kops create cluster --name={{clusterName}} ---cloud=aws --zones={{awsZones}} --out=.{{outDir}} --target=terraform
+
+        -   name: apply terraform config
+            ansible.builtin.shell:
+                chdir: {{outDir}}
+                cmd: terraform apply
+
+        -   name: validate cluster creation
+            ansible.builtin.shell:
+                cmd: kops validate cluster --wait 15m
+```
+
 ### Configure S3 backend
 Add required configuration to S3 backend definition.
 
